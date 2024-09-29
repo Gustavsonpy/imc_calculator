@@ -8,17 +8,23 @@ class InputForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: 100,
       height: 30,
+      margin: const EdgeInsets.only(right: 20),
       child: TextField(
         maxLines: 1,
         controller: controller,
         decoration: InputDecoration(
           hintText: label,
-          hintStyle: TextStyle(fontSize: 12),
-          border: const OutlineInputBorder()
+          hintStyle: const TextStyle(fontSize: 12),
+          border: const OutlineInputBorder(),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.amber),
+          ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
         ),
+        style: const TextStyle(fontSize: 12,), cursorColor: Colors.amber[600],
       ),
     );
   }
