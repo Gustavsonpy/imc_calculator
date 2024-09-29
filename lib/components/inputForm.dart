@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 
 class InputForm extends StatelessWidget {
   final TextEditingController controller;
@@ -34,7 +33,6 @@ class BtnForm extends StatelessWidget {
           style: ElevatedButton.styleFrom(fixedSize: Size(110, 10), backgroundColor: Colors.red),
           label: const Text('Send', style: TextStyle(color: Colors.black),),
           icon: const Icon(Icons.send_rounded, size: 20),
-          // iconAlignment: IconAlignment.end,
         );
   }
 }

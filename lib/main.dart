@@ -34,10 +34,12 @@ class _MyIMCState extends State<MyIMC> {
   final TextEditingController weightController = TextEditingController();
   final TextEditingController heightController = TextEditingController();
   bool imcActivate = false;
+  double imc = 0.0;
 
   void sendedData(){
     setState((){
         imcActivate = true;
+        imc = calcImc(double.parse(weightController.text), double.parse(heightController.text), imcActivate);
       }
     );
   }
@@ -49,18 +51,31 @@ class _MyIMCState extends State<MyIMC> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            InputForm(controller: weightController, label: 'Kg'),
             InputForm(controller: heightController, label: 'Height'),
+            InputForm(controller: weightController, label: 'Kg'),
             BtnForm(boolFunction: sendedData,),
           ],
         ),
         Image(
           image:
             imcActivate == true ? AssetImage(
-              personImage(calcImc(double.parse(weightController.text), double.parse(heightController.text), imcActivate))) : const AssetImage('img/palito.png'),
+              personImage(imc)) : const AssetImage('img/palito.png'),
               width: 200,
               height: 200,
+          ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: 1,
+            itemBuilder: (context, index){
+              return ListTile(
+                title: Text('IMC: ${imc.toStringAsFixed(1)}'),
+                trailing: Text(
+                  personHealthy(imc),
+                  style: const TextStyle(fontSize: 15),),
+              );
+            },
           )
+        )
       ],
     );
   }
