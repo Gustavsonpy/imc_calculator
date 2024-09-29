@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'components/inputForm.dart';
+import 'functions/imc.dart';
 
 void main(){
   runApp(MyApp());
@@ -32,15 +33,34 @@ class MyIMC extends StatefulWidget {
 class _MyIMCState extends State<MyIMC> {
   final TextEditingController weightController = TextEditingController();
   final TextEditingController heightController = TextEditingController();
-  
+  bool imcActivate = false;
+
+  void sendedData(){
+    setState((){
+        imcActivate = true;
+      }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
       children: [
-        InputForm(controller: weightController, label: 'Kg'),
-        InputForm(controller: heightController, label: 'Height'),
-        const BtnForm(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            InputForm(controller: weightController, label: 'Kg'),
+            InputForm(controller: heightController, label: 'Height'),
+            BtnForm(boolFunction: sendedData,),
+          ],
+        ),
+        Image(
+          image:
+            imcActivate == true ? AssetImage(
+              personImage(calcImc(double.parse(weightController.text), double.parse(heightController.text), imcActivate))) : const AssetImage('img/palito.png'),
+              width: 200,
+              height: 200,
+          )
       ],
     );
   }

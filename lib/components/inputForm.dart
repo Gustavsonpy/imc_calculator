@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../main.dart';
 
 class InputForm extends StatelessWidget {
   final TextEditingController controller;
@@ -23,12 +24,13 @@ class InputForm extends StatelessWidget {
 }
 
 class BtnForm extends StatelessWidget {
-  const BtnForm({super.key});
+  const BtnForm({super.key, this.boolFunction});
+  final boolFunction;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-          onPressed: null,
+          onPressed: boolFunction,
           style: ElevatedButton.styleFrom(fixedSize: Size(110, 10), backgroundColor: Colors.red),
           label: const Text('Send', style: TextStyle(color: Colors.black),),
           icon: const Icon(Icons.send_rounded, size: 20),
