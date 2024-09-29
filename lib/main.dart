@@ -47,30 +47,27 @@ class _MyIMCState extends State<MyIMC> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InputForm(controller: heightController, label: 'Height'),
             InputForm(controller: weightController, label: 'Kg'),
             BtnForm(boolFunction: sendedData,),
           ],
         ),
-        Image(
-          image:
-            imcActivate == true ? AssetImage(
-              personImage(imc)) : const AssetImage('img/palito.png'),
-              width: 200,
-              height: 200,
-          ),
+        imcActivate == true //Validation to show or not the image
+          ? Image(image: AssetImage(personImage(imc)), width: 200, height: 200,)
+          : const SizedBox(),
         Expanded(
           child: ListView.builder(
             itemCount: 1,
             itemBuilder: (context, index){
               return ListTile(
-                title: Text('IMC: ${imc.toStringAsFixed(1)}'),
+                title: Text((heightController.text.isEmpty) || (heightController.text.isEmpty) ? '' : 'IMC: ${imc.toStringAsFixed(1)}'),
                 trailing: Text(
-                  personHealthy(imc),
+                  (heightController.text.isEmpty) || (heightController.text.isEmpty) ? '' : personHealthy(imc),
                   style: const TextStyle(fontSize: 15),),
               );
             },
