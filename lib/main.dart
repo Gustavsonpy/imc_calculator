@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'components/inputForm.dart';
 
 void main(){
   runApp(MyApp());
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget{
           title: const Center(child: Text('IMC Calculator'),),
           backgroundColor: Colors.amber[200],
         ),
+        body: MyIMC(),
       ),
     );
   }
@@ -28,8 +30,18 @@ class MyIMC extends StatefulWidget {
 }
 
 class _MyIMCState extends State<MyIMC> {
+  final TextEditingController weightController = TextEditingController();
+  final TextEditingController heightController = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        InputForm(controller: weightController, label: 'Kg'),
+        InputForm(controller: heightController, label: 'Height'),
+        const BtnForm(),
+      ],
+    );
   }
 }
